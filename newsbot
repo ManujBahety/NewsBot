@@ -1,0 +1,96 @@
+import feedparser
+from twilio.rest import Client
+import smtplib
+s = smtplib.SMTP('smtp.gmail.com', 587) 
+s.starttls()
+#Change password
+s.login("csmanu184@gmail.com", "password")
+SID= 'ACbae6a815b2f91ca0d2e0ee2f1bc976bc' #Twilio SID
+auth = 'e2e83f2eccaec4a22e9f0c73d8478714' #Twilio Authentication Token
+
+ch=int(input("\033[1m\033[4mEnter choice \n 1-eSports(csgo) \n 2-Top News \n 3-Sports \n\033[4m\n"))
+if ch==1:
+    #Fetching the news from rss feed
+    news = feedparser.parse('https://www.hltv.org/rss/news')
+    cl = Client(SID,auth)
+
+    print("Number of News: " + str(len(news.entries)))
+
+    for i in range(1):
+        entry = news.entries[i]
+                     
+
+        print(entry.keys())
+    
+    
+    
+        title = "*"+entry.title+"*"
+        body = entry.summary_detail['value']
+        link = entry.link
+    
+    
+        msg = title+ "\n\n\n" + body + "\n\n\n" + link
+    
+    
+        #Command bot to send news body as a whatsapp message
+        #Enter number
+        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+91967506xxxx")
+        s.sendmail("csmanu184@gmail.com", "manujbahety@gmail.com", msg)
+        print(message.sid)
+    s.quit()   
+elif ch==2:
+    #Fetching the news from rss feed
+    news = feedparser.parse('https://www.hindustantimes.com/rss/world/rssfeed.xml')
+    cl = Client(SID,auth)
+
+    print("Number of News: " + str(len(news.entries)))
+
+    for i in range(2):
+        entry = news.entries[i]
+    
+        print(entry.keys())
+    
+    
+    
+        title = "*"+entry.title+"*"
+        body = entry.summary_detail['value']
+        link = entry.link
+    
+    
+        msg = title+ "\n\n\n" + body + "\n\n\n" + link
+    
+    
+        #Command bot to send news body as a whatsapp message
+        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+918860503500")
+        s.sendmail("csmanu184@gmail.com", "manujbahety@gmail.com", msg) 
+        print(message.sid)
+    s.quit()
+elif ch==3:
+    #Fetching the news from rss feed
+    news = feedparser.parse('https://timesofindia.indiatimes.com/rssfeeds/4719148.cms')
+    cl = Client(SID,auth)
+
+    print("Number of News: " + str(len(news.entries)))
+
+    for i in range(1):
+        entry = news.entries[i]
+    
+        print(entry.keys())
+    
+    
+    
+        title = "*"+entry.title+"*"
+        body = entry.summary_detail['value']
+        link = entry.link
+    
+    
+        msg = title+ "\n\n\n" + body + "\n\n\n" + link
+         
+    
+        #Command bot to send news body as a whatsapp message
+        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+918860503500")
+        s.sendmail("csmanu184@gmail.com", "manujbahety@gmail.com", msg)
+        print(message.sid)
+    s.quit()
+else:
+    print("Wrong Input")
