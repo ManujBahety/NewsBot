@@ -1,10 +1,6 @@
 import feedparser
 from twilio.rest import Client
-import smtplib
-s = smtplib.SMTP('smtp.gmail.com', 587) 
-s.starttls()
-#Change password
-s.login("csmanu184@gmail.com", "password")
+
 SID= 'ACbae6a815b2f91ca0d2e0ee2f1bc976bc' #Twilio SID
 auth = 'e2e83f2eccaec4a22e9f0c73d8478714' #Twilio Authentication Token
 
@@ -34,10 +30,9 @@ if ch==1:
     
         #Command bot to send news body as a whatsapp message
         #Enter number
-        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+91967506xxxx")
-        s.sendmail("csmanu184@gmail.com", "manujbahety@gmail.com", msg)
+        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+91886050xxxx")
         print(message.sid)
-    s.quit()   
+     
 elif ch==2:
     #Fetching the news from rss feed
     news = feedparser.parse('https://www.hindustantimes.com/rss/world/rssfeed.xml')
@@ -61,10 +56,10 @@ elif ch==2:
     
     
         #Command bot to send news body as a whatsapp message
-        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+918860503500")
-        s.sendmail("csmanu184@gmail.com", "manujbahety@gmail.com", msg) 
+        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+91886050xxxx")
+        
         print(message.sid)
-    s.quit()
+ 
 elif ch==3:
     #Fetching the news from rss feed
     news = feedparser.parse('https://timesofindia.indiatimes.com/rssfeeds/4719148.cms')
@@ -88,9 +83,9 @@ elif ch==3:
          
     
         #Command bot to send news body as a whatsapp message
-        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+918860503500")
-        s.sendmail("csmanu184@gmail.com", "manujbahety@gmail.com", msg)
+        message = cl.messages.create(from_="whatsapp:+14155238886",body = msg,to="whatsapp:+91886050xxxx")
+        
         print(message.sid)
-    s.quit()
+
 else:
     print("Wrong Input")
